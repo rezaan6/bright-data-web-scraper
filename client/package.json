@@ -1,0 +1,36 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write **/*.{js,jsx,json,md,ts,tsx,css}"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.0.16",
+    "firebase": "^9.18.0",
+    "firebase-admin": "^11.5.0",
+    "next": "13.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-firebase-hooks": "^5.1.1",
+    "react-hot-toast": "^2.4.0",
+    "react-spinkit": "^3.0.0",
+    "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "18.15.9",
+    "@types/react": "18.0.29",
+    "@types/react-dom": "18.0.11",
+    "@types/react-spinkit": "^3.0.7",
+    "autoprefixer": "^10.4.14",
+    "eslint": "8.36.0",
+    "eslint-config-next": "13.2.4",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.4",
+    "tailwindcss": "^3.2.7"
+  }
+}
