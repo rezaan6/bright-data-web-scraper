@@ -1,15 +1,14 @@
-"use client"
+"use client";
 
-import { Toaster } from "react-hot-toast"
+import { Toaster } from "react-hot-toast";
 
 const ClientProvider = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <>
-            <Toaster />
-            {children}
+  return (
+    <>
+      <Toaster />
+      {children}
+    </>
+  );
+};
 
-        </>
-    )
-}
-
-export default ClientProvider
+export default ClientProvider;

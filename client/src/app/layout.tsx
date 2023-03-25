@@ -13,15 +13,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="flex bg-[#F7FBFF] h-screen">
         <ClientProvider>
+          {/* SideBar */}
+          <Sidebar />
 
-        {/* SideBar */}
-        <Sidebar />
-
-        <main className="p-10 max-w-screen-2xl mx-auto overflow-y-auto ">
-          {/* Header */}
-          <Header />
-          {children}
-        </main>
+          <main className="p-10 max-w-screen-2xl mx-auto overflow-y-auto ">
+            {/* Header */}
+            <Header />
+            {children}
+          </main>
         </ClientProvider>
       </body>
     </html>
