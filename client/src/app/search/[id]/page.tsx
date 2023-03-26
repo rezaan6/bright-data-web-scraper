@@ -20,8 +20,6 @@ const SearchPage = ({ params: { id } }: Props) => {
   const handleDelete = async () => {
     router.push("/");
     deleteDoc(doc(db, "searches", id));
-
-   
   };
 
   const deleteButton = (
@@ -40,11 +38,13 @@ const SearchPage = ({ params: { id } }: Props) => {
 
   // console.log('!snapshot?.data()',snapshot.data());
 
-
   if (snapshot.data()?.status === "pending")
     return (
       <div className="flex flex-col gap-y-5 py-10 items-center justify-between">
-        <p className="text-indigo-600 animate-plus text-center"> Scraping result from Amazon... takes around 50s</p>
+        <p className="text-indigo-600 animate-plus text-center">
+          {" "}
+          Scraping result from Amazon... takes around 50s
+        </p>
         <Spinner
           style={{ height: "100px", width: "100px" }}
           name="cube-grid"
@@ -60,7 +60,8 @@ const SearchPage = ({ params: { id } }: Props) => {
       <div className="flex items-center justify-between mb-7">
         <div className="flex flex-col md:flex-row gap-x-4">
           <h1 className="font-bold">
-            Search result for <span className="text-indigo-600">&quot;{snapshot.data()?.search}&quot;</span>
+            Search result for{" "}
+            <span className="text-indigo-600">&quot;{snapshot.data()?.search}&quot;</span>
           </h1>
           <p>
             {snapshot.data()?.result?.length > 0 &&

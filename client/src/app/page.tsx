@@ -11,10 +11,9 @@ export default function HomePage() {
 
       <h2 className="text-lg italic text-center text-black/50">
         {" "}
-        To learn how to code from zero experience.
+        Type the keyword to search and hit "Enter"
       </h2>
 
-      <h3 className="text-lg text-center italic text-black/50">https://www.sample.com</h3>
     </div>
   );
 }

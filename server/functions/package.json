@@ -7,7 +7,8 @@
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "format": "prettier --write **/*.{js,jsx,json,md,ts,tsx,css}"
   },
   "engines": {
     "node": "18"
@@ -19,7 +20,8 @@
   },
   "devDependencies": {
     "typescript": "^4.9.0",
-    "firebase-functions-test": "^3.0.0"
+    "firebase-functions-test": "^3.0.0",
+    "prettier": "^2.8.4"
   },
   "private": true
 }

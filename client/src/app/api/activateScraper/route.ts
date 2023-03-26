@@ -1,10 +1,6 @@
 import { adminDb } from "@/../firebaseAdmin";
 import axios from "axios";
 
-type Data = {
-  collection_id: string;
-  start_eta: number;
-};
 export async function POST(req: Request, res: Response) {
   try {
     const { search } = await req.json();
@@ -31,37 +27,32 @@ export async function POST(req: Request, res: Response) {
       status: "pending",
       updatedAt: start_eta,
     });
-    // console.log(`Bearer ${process.env.BRIGHTDATA_API_KEY}`);
-    // console.log(`https://api.brightdata.com/dca/dataset?id=${collection_id}`);
     const url = `https://api.brightdata.com/dca/dataset?id=${collection_id}`;
     const config = {
       headers: {
-        Authorization: `Bearer ${process.env.BRIGHTDATA_API_KEY}`
-      }
+        Authorization: `Bearer ${process.env.BRIGHTDATA_API_KEY}`,
+      },
     };
 
-    await axios.get(url, config)
+    await axios
+      .get(url, config)
       .then(async (response: any) => {
-        // console.log('response.data',response.data);
-        // console.log('response.data.status',response.data.status);
-
-        const status = response.data.status ?? '';
+        const status = response.data.status ?? "";
         if (status !== "building" && status !== "collecting") {
-
-          await adminDb.collection('searches').doc(collection_id).set({
-            status: "complete",
-            updatedAt: start_eta,
-            result: response.data,
-          }, {
-            merge: true
-          });
-
+          await adminDb.collection("searches").doc(collection_id).set(
+            {
+              status: "complete",
+              updatedAt: start_eta,
+              result: response.data,
+            },
+            {
+              merge: true,
+            }
+          );
         }
-
-
       })
       .catch((error: any) => {
-        // console.log(error);
+        console.log(error);
       });
 
     return new Response(
@@ -71,7 +62,6 @@ export async function POST(req: Request, res: Response) {
       }),
       { status: 200 }
     );
-
   } catch (error: any) {
     return (
       JSON.stringify({
@@ -81,5 +71,3 @@ export async function POST(req: Request, res: Response) {
     );
   }
 }
-
-export async function GET(req: Request) { }

@@ -22,8 +22,6 @@ const Header = () => {
 
     try {
       // Call our API to activate the Scraper...
-      // /api/activateScraper
-
       const response = await fetch("/api/activateScraper", {
         method: "POST",
         headers: {
@@ -45,8 +43,6 @@ const Header = () => {
         id: notification,
       });
     }
-
-    // Wait for the response to come back
   };
 
   return (
