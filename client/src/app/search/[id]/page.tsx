@@ -43,7 +43,7 @@ const SearchPage = ({ params: { id } }: Props) => {
   if (snapshot.data()?.status === "pending")
     return (
       <div className="flex flex-col gap-y-5 py-10 items-center justify-between">
-        <p className="text-indigo-600 animate-plus text-center"> Scraping result from Amazon...</p>
+        <p className="text-indigo-600 animate-plus text-center"> Scraping result from Amazon... takes around 50s</p>
         <Spinner
           style={{ height: "100px", width: "100px" }}
           name="cube-grid"
