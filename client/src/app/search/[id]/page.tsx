@@ -37,6 +37,9 @@ const SearchPage = ({ params: { id } }: Props) => {
 
   if (!snapshot?.exists()) return;
 
+  console.log('!snapshot?.exists()',snapshot.exists());
+  
+
   if (snapshot.data()?.status === "pending")
     return (
       <div className="flex flex-col gap-y-5 py-10 items-center justify-between">
