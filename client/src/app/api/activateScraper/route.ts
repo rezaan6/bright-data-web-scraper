@@ -40,7 +40,7 @@ export async function POST(req: Request, res: Response) {
       }
     };
 
-    axios.get(url, config)
+    await axios.get(url, config)
       .then(async (response: any) => {
         console.log('response.data',response.data);
         console.log('response.data.status',response.data.status);
