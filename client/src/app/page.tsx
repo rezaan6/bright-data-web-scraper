@@ -11,7 +11,7 @@ export default function HomePage() {
 
       <h2 className="text-lg italic text-center text-black/50">
         {" "}
-        Type the keyword to search and hit &quotEnter&quot
+        Type the keyword to search and hit Enter
       </h2>
 
     </div>
