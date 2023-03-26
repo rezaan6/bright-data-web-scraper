@@ -38,7 +38,7 @@ export const onScraperComplete = functions.https.onRequest(async (request, respo
     if (!success) {
         await adminDb.collection('searches').doc(id).set({
             status: "error",
-            updateAt: finished,
+            updatedAt: finished,
         }, {
             merge: true
         });
