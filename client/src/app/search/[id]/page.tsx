@@ -18,9 +18,10 @@ const SearchPage = ({ params: { id } }: Props) => {
   const router = useRouter();
 
   const handleDelete = async () => {
-    await deleteDoc(doc(db, "searches", id));
-
     router.push("/");
+    deleteDoc(doc(db, "searches", id));
+
+   
   };
 
   const deleteButton = (
