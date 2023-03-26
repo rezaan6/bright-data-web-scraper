@@ -16,8 +16,6 @@ const fetchResults: any = async (id: string) => {
 
     const data = await res.json();
 
-    console.log('data', data);
-
 
     if (data.status === "building" || data.status === "collecting") {
         console.log("NOT COMPLETE YET, TRY AGAIN...");
@@ -29,8 +27,11 @@ const fetchResults: any = async (id: string) => {
 }
 
 export const onScraperComplete = functions.https.onRequest(async (request, response) => {
-
-    console.log("SCRAPE COMPLETE >>>> :", request.body);
+    console.log("SCRAPE (request.body).length >>>> :", Object.keys(request.body).length);
+    if (Object.keys(request.body).length === 0) {
+        response.send("test");
+        return; // Stop execution
+    }
 
     const { success, id, finished } = request.body;
 
@@ -40,7 +41,7 @@ export const onScraperComplete = functions.https.onRequest(async (request, respo
             updateAt: finished,
         }, {
             merge: true
-        })
+        });
     }
 
     const data = await fetchResults(id);
@@ -51,39 +52,11 @@ export const onScraperComplete = functions.https.onRequest(async (request, respo
         result: data,
     }, {
         merge: true
-    })
+    });
 
     response.send("Scraping Function Finished");
-});
-
-export const onScraperDelete = functions.https.onRequest(async (request) => {
-
-    console.log("SCRAPE COMPLETE >>>> :", request.body);
-
-    const { collectionId } = request.body;
-
-    const url = `https://api.brightdata.com/datasets/collections/${collectionId}`;
-    const api_key = process.env.BRIGHTDATA_API_KEY
-    const response = await fetch(url, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${api_key}`,
-        },
-    }
-
-    )
-
-
-
-    if (response.ok) {
-        console.log(`Collection with ID ${collectionId} deleted successfully`);
-    } else {
-        console.error(`Failed to delete collection with ID ${collectionId}: ${response.status} ${await response.text()}`);
-    }
-
-
 
 });
 
 
-// https://75e1-112-134-219-176.ap.ngrok.io/bright-data-web-scraperld/us-central1/onScraperComplete
+// https://5197-112-134-220-238.ap.ngrok.io/bright-data-web-scraper/us-central1/onScraperComplete

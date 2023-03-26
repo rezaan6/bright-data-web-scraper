@@ -20,14 +20,6 @@ const SearchPage = ({ params: { id } }: Props) => {
   const handleDelete = () => {
     deleteDoc(doc(db, "searches", id));
 
-    fetch("https://us-central1-bright-data-web-scraper.cloudfunctions.net/onScraperDelete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ collectionId: id }),
-    });
-
     router.push("/");
   };
 
@@ -58,8 +50,6 @@ const SearchPage = ({ params: { id } }: Props) => {
         {deleteButton}
       </div>
     );
-
-  console.log("snapshot.data()", snapshot.data());
 
   return (
     <div className="py-5">

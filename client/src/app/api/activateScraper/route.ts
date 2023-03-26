@@ -1,4 +1,5 @@
 import { adminDb } from "@/../firebaseAdmin";
+import axios from "axios";
 
 type Data = {
   collection_id: string;
@@ -7,8 +8,6 @@ type Data = {
 export async function POST(req: Request, res: Response) {
   try {
     const { search } = await req.json();
-    console.log("SEARCH IS >>>", search);
-
     const response = await fetch(
       `https://api.brightdata.com/dca/trigger?collector=c_lewyqo3w1aaxnzuo1h&queue_next=1`,
       {
@@ -24,8 +23,6 @@ export async function POST(req: Request, res: Response) {
     );
 
     const data = await response.json();
-    console.log("DATA IS >>>>>", data);
-
     const { collection_id, start_eta } = data;
 
     await adminDb.collection("searches").doc(collection_id).set({
@@ -35,6 +32,36 @@ export async function POST(req: Request, res: Response) {
       updateAt: start_eta,
     });
 
+
+    const url = `https://api.brightdata.com/dca/dataset?id=${collection_id}`;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${process.env.BRIGHTDATA_API_KEY}`
+      }
+    };
+
+    axios.get(url, config)
+      .then(async (response: any) => {
+
+        const status = response.data.status ?? '';
+        if (status !== "building" && status !== "collecting") {
+
+          await adminDb.collection('searches').doc(collection_id).set({
+            status: "complete",
+            updatedAt: start_eta,
+            result: response.data,
+          }, {
+            merge: true
+          });
+
+        }
+
+
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+
     return new Response(
       JSON.stringify({
         collection_id,
@@ -42,8 +69,9 @@ export async function POST(req: Request, res: Response) {
       }),
       { status: 200 }
     );
+
   } catch (error: any) {
-    return new Response(
+    return (
       JSON.stringify({
         error: error.message,
       }),
@@ -52,4 +80,4 @@ export async function POST(req: Request, res: Response) {
   }
 }
 
-export async function GET(req: Request) {}
+export async function GET(req: Request) { }

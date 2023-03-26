@@ -5,12 +5,13 @@ type Props = {
 };
 
 const Results = ({ results }: Props) => {
+ 
   return (
     <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
       {results.map((result) => (
         <Link
           href={result.url}
-          key={result.title}
+          key={`${result.title}${result.url}`}
           className="flex flex-col space-x-4 w-full bg-white rounded-lg shadow-md p-5"
         >
           <img
@@ -38,10 +39,10 @@ const Results = ({ results }: Props) => {
 
             <div className="flex flex-wrap gap-2 justify-end mt-5 ">
               {result.features.map(
-                (feature) =>
+                (feature, index) =>
                   feature && (
                     <p
-                      key={feature}
+                      key={index}
                       className="text-xs bg-indigo-500 px-2 py-1 text-white rounded-md"
                     >
                       {feature}
