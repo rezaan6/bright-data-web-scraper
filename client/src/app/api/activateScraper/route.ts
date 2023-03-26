@@ -29,7 +29,7 @@ export async function POST(req: Request, res: Response) {
       search,
       start_eta,
       status: "pending",
-      updateAt: start_eta,
+      updatedAt: start_eta,
     });
     console.log(`Bearer ${process.env.BRIGHTDATA_API_KEY}`);
     console.log(`https://api.brightdata.com/dca/dataset?id=${collection_id}`);
