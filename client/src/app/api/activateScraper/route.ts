@@ -43,7 +43,9 @@ export async function POST(req: Request, res: Response) {
     axios.get(url, config)
       .then(async (response: any) => {
 
-        const status = response.data.status ?? '';
+        console.log('response.data.status',response.data.status);
+        
+        const status = response?.data?.status ?? '';
         if (status !== "building" && status !== "collecting") {
 
           await adminDb.collection('searches').doc(collection_id).set({
