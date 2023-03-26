@@ -35,25 +35,39 @@ export async function POST(req: Request, res: Response) {
     };
 
 
-    await axios.get(url, config)
-      .then(async (response: any) => {
-        const status = response.data.status ?? "";
-        if (!status) {
-          await adminDb.collection("searches").doc(collection_id).set(
-            {
-              status: "complete",
-              updatedAt: start_eta,
-              result: response.data,
-            },
-            {
-              merge: true,
+    const repeatRequest = async () => {
+      // Define the number of iterations you want to repeat the request
+      const numberOfIterations = 2;
+      for (let i = 0; i < numberOfIterations; i++) {
+        // Introduce a delay of 2 seconds before each iteration
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Make the HTTP request and process the response
+        await axios.get(url, config)
+          .then(async (response: any) => {
+            const status = response.data.status ?? "";
+            if (!status) {
+              await adminDb.collection("searches").doc(collection_id).set(
+                {
+                  status: "complete",
+                  updatedAt: start_eta,
+                  result: response.data,
+                },
+                {
+                  merge: true,
+                }
+              );
             }
-          );
-        }
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
+          })
+          .catch((error: any) => {
+            console.log(error);
+          });
+      }
+    }
+
+    // Call the repeatRequest function to start repeating the code block
+    repeatRequest();
+
 
 
 
