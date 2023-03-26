@@ -18,7 +18,7 @@ const fetchResults: any = async (id: string) => {
 
 
     if (data.status === "building" || data.status === "collecting") {
-        console.log("NOT COMPLETE YET, TRY AGAIN...");
+        // console.log("NOT COMPLETE YET, TRY AGAIN...");
         return fetchResults(id);
 
     }
@@ -27,7 +27,7 @@ const fetchResults: any = async (id: string) => {
 }
 
 export const onScraperComplete = functions.https.onRequest(async (request, response) => {
-    console.log("SCRAPE (request.body).length >>>> :", Object.keys(request.body).length);
+    // console.log("SCRAPE (request.body).length >>>> :", Object.keys(request.body).length);
     if (Object.keys(request.body).length === 0) {
         response.send("test");
         return; // Stop execution

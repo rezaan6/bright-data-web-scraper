@@ -37,8 +37,8 @@ const SearchPage = ({ params: { id } }: Props) => {
 
   if (!snapshot?.exists()) return;
 
-  console.log('!snapshot?.data()',snapshot.data());
-  
+  // console.log('!snapshot?.data()',snapshot.data());
+
 
   if (snapshot.data()?.status === "pending")
     return (
