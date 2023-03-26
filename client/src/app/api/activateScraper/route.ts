@@ -45,7 +45,7 @@ export async function POST(req: Request, res: Response) {
         console.log('response.data',response.data);
         console.log('response.data.status',response.data.status);
         
-        const status = response?.data?.status ?? '';
+        const status = response.data.status ?? '';
         if (status !== "building" && status !== "collecting") {
 
           await adminDb.collection('searches').doc(collection_id).set({
