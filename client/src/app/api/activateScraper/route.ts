@@ -34,26 +34,28 @@ export async function POST(req: Request, res: Response) {
       },
     };
 
-    await axios
-      .get(url, config)
-      .then(async (response: any) => {
-        const status = response.data.status ?? "";
-        if (status !== "building" && status !== "collecting") {
-          await adminDb.collection("searches").doc(collection_id).set(
-            {
-              status: "complete",
-              updatedAt: start_eta,
-              result: response.data,
-            },
-            {
-              merge: true,
-            }
-          );
-        }
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
+    for (let i = 0; i < 2; i++) {
+      await axios.get(url, config)
+        .then(async (response: any) => {
+          const status = response.data.status ?? "";
+          if (status !== "building" && status !== "collecting") {
+            await adminDb.collection("searches").doc(collection_id).set(
+              {
+                status: "complete",
+                updatedAt: start_eta,
+                result: response.data,
+              },
+              {
+                merge: true,
+              }
+            );
+          }
+        })
+        .catch((error: any) => {
+          console.log(error);
+        });
+    }
+
 
     return new Response(
       JSON.stringify({
