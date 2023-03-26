@@ -17,8 +17,8 @@ const SearchPage = ({ params: { id } }: Props) => {
   const [snapshot, loading, error] = useDocument(doc(db, "searches", id));
   const router = useRouter();
 
-  const handleDelete = () => {
-    deleteDoc(doc(db, "searches", id));
+  const handleDelete = async () => {
+    await deleteDoc(doc(db, "searches", id));
 
     router.push("/");
   };
