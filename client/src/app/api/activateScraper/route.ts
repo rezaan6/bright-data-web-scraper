@@ -31,8 +31,8 @@ export async function POST(req: Request, res: Response) {
       status: "pending",
       updateAt: start_eta,
     });
-
-
+    console.log(`Bearer ${process.env.BRIGHTDATA_API_KEY}`);
+    console.log(`https://api.brightdata.com/dca/dataset?id=${collection_id}`);
     const url = `https://api.brightdata.com/dca/dataset?id=${collection_id}`;
     const config = {
       headers: {
@@ -42,7 +42,7 @@ export async function POST(req: Request, res: Response) {
 
     axios.get(url, config)
       .then(async (response: any) => {
-
+        console.log('response.data',response.data);
         console.log('response.data.status',response.data.status);
         
         const status = response?.data?.status ?? '';
