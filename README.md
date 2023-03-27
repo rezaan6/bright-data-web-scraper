@@ -39,23 +39,25 @@ synced state.
 
 - View list of products
 
+![List of Product](https://user-images.githubusercontent.com/72515147/227997928-2288ec53-1d66-43e3-98ec-6221e9d4ae45.gif)
+
 - View list of searches
 
+![Each Product](https://user-images.githubusercontent.com/72515147/227999377-bd2203cc-1596-47eb-9eb3-75d98af5e826.gif)
+
 - Responsive layout
+
+![Responsiveness](https://user-images.githubusercontent.com/72515147/227999403-4f98e724-7ef5-4c2a-af03-ec22ec4b42cc.gif)
 
 - Independed Action, can refresh the page and still have the real time state
 
 - Delete record
 
-- Click to go to the link
+- Click to go to the amazon link
 
 - Loading Spinner, React spint kit
 
 - Toast Notification, React hot toast
-
-
-
-
 
 ## Bright Data API
 - `activateScraper`
